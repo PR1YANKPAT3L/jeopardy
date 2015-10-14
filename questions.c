@@ -45,9 +45,9 @@ void initialize_game(void)
     strcpy(questions[5].question, "The U.S. Air Force was part of the Army until ... It was called the Army Air Corp");
     strcpy(questions[5].answer, "1946");
 
-    questions[].value = 200;
-    strcpy(questions[].question, "Mt. Logan was thought the highest on this continent till someone measured Mt. McKinley");
-    strcpy(questions[]6.answer, "North America");
+    questions[6].value = 200;
+    strcpy(questions[6].question, "Mt. Logan was thought the highest on this continent till someone measured Mt. McKinley");
+    strcpy(questions[6].answer, "North America");
 
     questions[7].value = 200;
     strcpy(questions[7].question, "Different surveys have reported its height as 29,002, 29,141 and 29,028 feet");
@@ -108,7 +108,7 @@ void display_question(char *category, int value)
 	if(num == -1)
 		printf("question %s not found, %d\n", category, value);
 
-	printif("\t%s\n", questions[num].question);
+	printf("\t%s\n", questions[num].question);
 }
 
 // Returns true if the answer is correct for the question for that category and dollar value
@@ -126,8 +126,8 @@ bool valid_answer(char *category, int value, char *answer)
 bool already_answered(char *category, int value)
 {
 	for(int i = 0; i < 12; i++)
-		if(questions[i].value == value && strcmp(question[i].category, category) == 0)
-			return questions[i].anaswered;
+		if (questions[i].value == value && strcmp(questions[i].category, category) == 0)
+			return questions[i].answered;
 
     // lookup the question and see if it's already been marked as answered
     return true;

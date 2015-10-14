@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     player players[NUM_PLAYERS];
     
     // Input buffer and and commands
-    char buffer[BUFFER_LEN] = { 0 };
+    //char buffer[BUFFER_LEN] = { 0 };
 
     // Display the game introduction and initialize the questions
     initialize_game();
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 
             printf("Enter first player's name: ");
             scanf("%s", (char *) &selected_player);
-        } while(!validate_player(players, selected_player, 4));
+        } while(!player_exists(players, 4, selected_player));
 
         do {
             if(selected_val != 0)
@@ -77,11 +77,11 @@ int main(int argc, char *argv[])
 
             printf("Enter: ");
             scanf("%d", (int *) &selected_val);
-        } while(has_answered(selected_category, selected_val));
+        } while(already_answered(selected_category, selected_val));
 
 
         system("clear");
-        render_question(selected_category, selected_val);
+        display_question(selected_category, selected_val);
 
         char *answer[MAX_LEN] = {0};
         getchar();
@@ -92,12 +92,12 @@ int main(int argc, char *argv[])
 
         if(tokenize_answer == NULL)
             printf("Try again");
-        else if(is_correct(selected_category, selected_val, tokenize_answer)) {
+        else if(valid_answer(selected_category, selected_val, tokenize_answer)) {
             printf("Correct Answer!");
             printf("%s gains %d points \n", selected_player, selected_val);
-            update_scoreboard(players, 4, selected_player, selected_val);
+            update_score(players, 4, selected_player, selected_val);
         } else {
-            printif("Wrong Answer!");
+            printf("Wrong Answer!");
             int num = get_question_number(selected_category, selected_val);
             printf("Correct answer was: %s", questions[num].answer);
         }
@@ -111,7 +111,7 @@ int main(int argc, char *argv[])
         // Display the final results and exit
     }
 
-    render_result(players, 4);
+    show_results(players, 4);
     getchar();
 
     return EXIT_SUCCESS;
@@ -149,7 +149,7 @@ void show_results(player *players, int num_players) {
 
     printf("Scores: \n");
     for(int i = 0; i < num_players; i++)
-        printf("%s*s: %d\n", name + 1, players[i].name, players[i].score);
+        printf("%*s: %d\n", name + 1, players[i].name, players[i].score);
 
     printf("Winner: %s", players[winner].name);
 }
