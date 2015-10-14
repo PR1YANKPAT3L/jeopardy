@@ -18,9 +18,9 @@
 
 // List of 3 categories as array of strings
 static char categories[NUM_CATEGORIES][MAX_LEN] = {
-    "programming", 
-    "algorithms", 
-    "databases"
+    "Science", 
+    "The Military", 
+    "Mountains"
 };
 
 // Questions struct for each question
@@ -50,5 +50,11 @@ extern bool valid_answer(char *category, int value, char *answer);
 
 // Returns true if the question has already been answered
 extern bool already_answered(char *category, int value);
+
+extern void track_answered(char *category, int value);
+
+extern bool answered_status();
+
+extern int get_question_number(char *category, int value);
 
 #endif /* QUESTIONS_H_ */
